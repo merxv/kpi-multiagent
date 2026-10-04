@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+logs/*
+!logs/.gitkeep
+runs/*
+!runs/.gitkeep
+data/kpi_library.db
+.claude/
+~$*.docx
+docs
