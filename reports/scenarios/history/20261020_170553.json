@@ -1,0 +1,1394 @@
+{
+  "started": "2026-10-20T17:05:53",
+  "model": "qwen2.5:7b",
+  "results": [
+    {
+      "id": "S01",
+      "title": "Типовой сценарий — все направления",
+      "expected_result": "Найдено 3–4 цели, сформировано не менее 6 KPI с формулой и единицей; не менее 60% KPI приняты; у каждой цели есть принятый KPI; целевые значения согласованы с направлением показателя; ни один агент не выполняет более 40% вызовов.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "min_goals",
+          "expected": 3,
+          "actual": 4,
+          "ok": true
+        },
+        {
+          "check": "min_kpis",
+          "expected": 6,
+          "actual": 8,
+          "ok": true
+        },
+        {
+          "check": "kpi_fields_complete",
+          "expected": true,
+          "actual": "8/8 заполнены",
+          "ok": true
+        },
+        {
+          "check": "targets_consistent",
+          "expected": true,
+          "actual": "все согласованы",
+          "ok": true
+        },
+        {
+          "check": "min_approved_share",
+          "expected": 0.6,
+          "actual": 1.0,
+          "ok": true
+        },
+        {
+          "check": "min_goal_coverage",
+          "expected": 0.75,
+          "actual": 1.0,
+          "ok": true
+        },
+        {
+          "check": "max_agent_share",
+          "expected": 0.4,
+          "actual": "0.323 (reviewer)",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_170553_fd88",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 4,
+        "tasks": 8,
+        "kpis": 8,
+        "approved_share": 1.0,
+        "first_pass_share": 0.875,
+        "data_linked_share": 0.5,
+        "goal_coverage": 1.0,
+        "avg_smart": 3.92,
+        "revisions_total": 1,
+        "steps": 62,
+        "elapsed_sec": 130.2,
+        "llm_calls": 34,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.323,
+        "max_agent": "reviewer",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "reviewer",
+          "llm_calls": 9,
+          "tool_calls": 11,
+          "total": 20,
+          "share": 0.323
+        },
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 9,
+          "tool_calls": 10,
+          "total": 19,
+          "share": 0.306
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 9,
+          "tool_calls": 5,
+          "total": 14,
+          "share": 0.226
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 2,
+          "tool_calls": 2,
+          "total": 4,
+          "share": 0.065
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 4,
+          "tool_calls": 0,
+          "total": 4,
+          "share": 0.065
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.016
+        }
+      ],
+      "wall_sec": 130.2,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_170553_fd88.jsonl",
+      "typical": true
+    },
+    {
+      "id": "S02",
+      "title": "Фокус на одном направлении (наука)",
+      "expected_result": "Оркестратор извлекает фокус «наука»; все выбранные цели относятся к науке; сформирован хотя бы 1 KPI.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "focus_directions",
+          "expected": [
+            "наука"
+          ],
+          "actual": [
+            "наука"
+          ],
+          "ok": true
+        },
+        {
+          "check": "goal_directions_subset",
+          "expected": [
+            "наука"
+          ],
+          "actual": [
+            "наука"
+          ],
+          "ok": true
+        },
+        {
+          "check": "min_kpis",
+          "expected": 1,
+          "actual": 2,
+          "ok": true
+        },
+        {
+          "check": "max_agent_share",
+          "expected": 0.4,
+          "actual": "0.263 (kpi_builder)",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_170803_f16d",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 1,
+        "tasks": 2,
+        "kpis": 2,
+        "approved_share": 1.0,
+        "first_pass_share": 1.0,
+        "data_linked_share": 0.5,
+        "goal_coverage": 1.0,
+        "avg_smart": 4.0,
+        "revisions_total": 0,
+        "steps": 19,
+        "elapsed_sec": 40.5,
+        "llm_calls": 10,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.263,
+        "max_agent": "kpi_builder",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 2,
+          "tool_calls": 3,
+          "total": 5,
+          "share": 0.263
+        },
+        {
+          "agent": "reviewer",
+          "llm_calls": 2,
+          "tool_calls": 3,
+          "total": 5,
+          "share": 0.263
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 2,
+          "tool_calls": 2,
+          "total": 4,
+          "share": 0.211
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 2,
+          "tool_calls": 1,
+          "total": 3,
+          "share": 0.158
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.053
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.053
+        }
+      ],
+      "wall_sec": 40.5,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_170803_f16d.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S03",
+      "title": "Другой горизонт планирования (2028)",
+      "expected_result": "Горизонт плана — 2028 год, у всех KPI год цели 2028; цели относятся к цифровизации.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "horizon_year",
+          "expected": 2028,
+          "actual": "план 2028, KPI [2028]",
+          "ok": true
+        },
+        {
+          "check": "goal_directions_subset",
+          "expected": [
+            "цифровизация"
+          ],
+          "actual": [
+            "цифровизация"
+          ],
+          "ok": true
+        },
+        {
+          "check": "min_kpis",
+          "expected": 1,
+          "actual": 2,
+          "ok": true
+        },
+        {
+          "check": "targets_consistent",
+          "expected": true,
+          "actual": "все согласованы",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_170843_cb25",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 1,
+        "tasks": 2,
+        "kpis": 2,
+        "approved_share": 1.0,
+        "first_pass_share": 1.0,
+        "data_linked_share": 0.5,
+        "goal_coverage": 1.0,
+        "avg_smart": 3.7,
+        "revisions_total": 0,
+        "steps": 19,
+        "elapsed_sec": 39.2,
+        "llm_calls": 10,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.263,
+        "max_agent": "kpi_builder",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 2,
+          "tool_calls": 3,
+          "total": 5,
+          "share": 0.263
+        },
+        {
+          "agent": "reviewer",
+          "llm_calls": 2,
+          "tool_calls": 3,
+          "total": 5,
+          "share": 0.263
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 2,
+          "tool_calls": 2,
+          "total": 4,
+          "share": 0.211
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 2,
+          "tool_calls": 1,
+          "total": 3,
+          "share": 0.158
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.053
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.053
+        }
+      ],
+      "wall_sec": 39.2,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_170843_cb25.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S04",
+      "title": "Документ с одной стратегической целью",
+      "expected_result": "Система не выдумывает лишних целей (не более 2), формирует KPI по цифровой среде.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "min_goals",
+          "expected": 1,
+          "actual": 1,
+          "ok": true
+        },
+        {
+          "check": "max_goals",
+          "expected": 2,
+          "actual": 1,
+          "ok": true
+        },
+        {
+          "check": "min_kpis",
+          "expected": 1,
+          "actual": 2,
+          "ok": true
+        },
+        {
+          "check": "kpi_fields_complete",
+          "expected": true,
+          "actual": "2/2 заполнены",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_170922_88bd",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 1,
+        "tasks": 2,
+        "kpis": 2,
+        "approved_share": 1.0,
+        "first_pass_share": 1.0,
+        "data_linked_share": 0.5,
+        "goal_coverage": 1.0,
+        "avg_smart": 3.9,
+        "revisions_total": 0,
+        "steps": 18,
+        "elapsed_sec": 31.8,
+        "llm_calls": 9,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.278,
+        "max_agent": "kpi_builder",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 2,
+          "tool_calls": 3,
+          "total": 5,
+          "share": 0.278
+        },
+        {
+          "agent": "reviewer",
+          "llm_calls": 2,
+          "tool_calls": 3,
+          "total": 5,
+          "share": 0.278
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 1,
+          "tool_calls": 2,
+          "total": 3,
+          "share": 0.167
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 2,
+          "tool_calls": 1,
+          "total": 3,
+          "share": 0.167
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.056
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.056
+        }
+      ],
+      "wall_sec": 31.8,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_170922_88bd.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S05",
+      "title": "Входной документ в формате DOCX",
+      "expected_result": "Документ DOCX читается, система проходит полный цикл и формирует KPI.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "min_goals",
+          "expected": 2,
+          "actual": 2,
+          "ok": true
+        },
+        {
+          "check": "min_kpis",
+          "expected": 3,
+          "actual": 4,
+          "ok": true
+        },
+        {
+          "check": "kpi_fields_complete",
+          "expected": true,
+          "actual": "4/4 заполнены",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_170954_5e4e",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 2,
+        "tasks": 4,
+        "kpis": 4,
+        "approved_share": 1.0,
+        "first_pass_share": 1.0,
+        "data_linked_share": 0.25,
+        "goal_coverage": 1.0,
+        "avg_smart": 3.85,
+        "revisions_total": 0,
+        "steps": 30,
+        "elapsed_sec": 66.1,
+        "llm_calls": 17,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.3,
+        "max_agent": "kpi_builder",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.3
+        },
+        {
+          "agent": "reviewer",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.3
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 4,
+          "tool_calls": 1,
+          "total": 5,
+          "share": 0.167
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 2,
+          "tool_calls": 2,
+          "total": 4,
+          "share": 0.133
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 2,
+          "tool_calls": 0,
+          "total": 2,
+          "share": 0.067
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.033
+        }
+      ],
+      "wall_sec": 66.1,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_170954_5e4e.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S06",
+      "title": "Входной документ в формате PDF",
+      "expected_result": "Документ PDF читается, система проходит полный цикл и формирует KPI.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "min_goals",
+          "expected": 2,
+          "actual": 2,
+          "ok": true
+        },
+        {
+          "check": "min_kpis",
+          "expected": 3,
+          "actual": 4,
+          "ok": true
+        },
+        {
+          "check": "kpi_fields_complete",
+          "expected": true,
+          "actual": "4/4 заполнены",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171100_d1ea",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 2,
+        "tasks": 4,
+        "kpis": 4,
+        "approved_share": 1.0,
+        "first_pass_share": 1.0,
+        "data_linked_share": 0.25,
+        "goal_coverage": 1.0,
+        "avg_smart": 3.95,
+        "revisions_total": 0,
+        "steps": 30,
+        "elapsed_sec": 63.2,
+        "llm_calls": 17,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.3,
+        "max_agent": "kpi_builder",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.3
+        },
+        {
+          "agent": "reviewer",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.3
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 4,
+          "tool_calls": 1,
+          "total": 5,
+          "share": 0.167
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 2,
+          "tool_calls": 2,
+          "total": 4,
+          "share": 0.133
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 2,
+          "tool_calls": 0,
+          "total": 2,
+          "share": 0.067
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.033
+        }
+      ],
+      "wall_sec": 63.2,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171100_d1ea.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S07",
+      "title": "Расплывчатая стратегия без измеримых целей",
+      "expected_result": "Система не падает с непредвиденной ошибкой: либо сообщает, что целей нет, либо формирует KPI, у каждого из которых есть формула и единица измерения.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done",
+            "failed"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "no_unexpected_error",
+          "expected": true,
+          "actual": "нет ошибок",
+          "ok": true
+        },
+        {
+          "check": "kpi_fields_complete",
+          "expected": true,
+          "actual": "4/4 заполнены",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171204_c81b",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 2,
+        "tasks": 4,
+        "kpis": 4,
+        "approved_share": 1.0,
+        "first_pass_share": 1.0,
+        "data_linked_share": 0.25,
+        "goal_coverage": 1.0,
+        "avg_smart": 3.55,
+        "revisions_total": 0,
+        "steps": 29,
+        "elapsed_sec": 57.3,
+        "llm_calls": 16,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.31,
+        "max_agent": "kpi_builder",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.31
+        },
+        {
+          "agent": "reviewer",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.31
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 4,
+          "tool_calls": 1,
+          "total": 5,
+          "share": 0.172
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 1,
+          "tool_calls": 2,
+          "total": 3,
+          "share": 0.103
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 2,
+          "tool_calls": 0,
+          "total": 2,
+          "share": 0.069
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.034
+        }
+      ],
+      "wall_sec": 57.3,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171204_c81b.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S08",
+      "title": "Документ без стратегических целей",
+      "expected_result": "Понятное сообщение «В документе не найдено стратегических целей», KPI не создаются.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "не найдено стратегических целей",
+          "actual": "В документе не найдено стратегических целей",
+          "ok": true
+        },
+        {
+          "check": "max_kpis",
+          "expected": 0,
+          "actual": 0,
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171301_41d0",
+      "status": "failed",
+      "errors": [
+        "В документе не найдено стратегических целей"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 4,
+        "elapsed_sec": 5.1,
+        "llm_calls": 2,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.75,
+        "max_agent": "strategy_analyst",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 1,
+          "tool_calls": 2,
+          "total": 3,
+          "share": 0.75
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.25
+        }
+      ],
+      "wall_sec": 5.1,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171301_41d0.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S09",
+      "title": "Слишком короткий документ",
+      "expected_result": "Понятное сообщение «Документ пуст или слишком короткий».",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "слишком короткий",
+          "actual": "Инструмент read_document: Документ пуст или слишком короткий (меньше 100 символов)",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171306_7685",
+      "status": "failed",
+      "errors": [
+        "Инструмент read_document: Документ пуст или слишком короткий (меньше 100 символов)"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 2,
+        "elapsed_sec": 2.7,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.5,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.5
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 0,
+          "tool_calls": 1,
+          "total": 1,
+          "share": 0.5
+        }
+      ],
+      "wall_sec": 2.7,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171306_7685.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S10",
+      "title": "Неподдерживаемый формат файла",
+      "expected_result": "Понятное сообщение «Неподдерживаемый формат» со списком допустимых форматов.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "Неподдерживаемый формат",
+          "actual": "Инструмент read_document: Неподдерживаемый формат: .csv. Допустимо: txt, md, pdf, docx",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171309_3262",
+      "status": "failed",
+      "errors": [
+        "Инструмент read_document: Неподдерживаемый формат: .csv. Допустимо: txt, md, pdf, docx"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 2,
+        "elapsed_sec": 2.8,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.5,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.5
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 0,
+          "tool_calls": 1,
+          "total": 1,
+          "share": 0.5
+        }
+      ],
+      "wall_sec": 2.8,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171309_3262.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S11",
+      "title": "Файл не существует",
+      "expected_result": "Понятное сообщение «Файл не найден».",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "Файл не найден",
+          "actual": "Инструмент read_document: Файл не найден: missing_strategy.txt",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171311_29fa",
+      "status": "failed",
+      "errors": [
+        "Инструмент read_document: Файл не найден: missing_strategy.txt"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 2,
+        "elapsed_sec": 2.7,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.5,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.5
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 0,
+          "tool_calls": 1,
+          "total": 1,
+          "share": 0.5
+        }
+      ],
+      "wall_sec": 2.7,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171311_29fa.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S12",
+      "title": "Модель недоступна (Ollama выключена)",
+      "expected_result": "Понятное сообщение «Нет связи с Ollama», система не зависает, состояние и лог сохранены.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "Нет связи с Ollama",
+          "actual": "orchestrator: Нет связи с Ollama (http://127.0.0.1:9). Запустите Ollama и повторите.",
+          "ok": true
+        },
+        {
+          "check": "state_saved",
+          "expected": true,
+          "actual": "runs/ и logs/ записаны",
+          "ok": true
+        },
+        {
+          "check": "max_elapsed_sec",
+          "expected": 30,
+          "actual": 2.0,
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171314_0d05",
+      "status": "failed",
+      "errors": [
+        "orchestrator: Нет связи с Ollama (http://127.0.0.1:9). Запустите Ollama и повторите."
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 1,
+        "elapsed_sec": 2.0,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 1,
+        "max_agent_share": 1.0,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 1.0
+        }
+      ],
+      "wall_sec": 2.0,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171314_0d05.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S13",
+      "title": "Защита от зацикливания — лимит шагов",
+      "expected_result": "Прогон останавливается на 13-м шаге со статусом stopped_by_limit и сообщением о лимите шагов; частичные результаты (цели, задачи) сохранены.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "stopped_by_limit"
+          ],
+          "actual": "stopped_by_limit",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "лимит шагов",
+          "actual": "Остановлено защитой: Превышен лимит шагов (12). Показаны частичные результаты.",
+          "ok": true
+        },
+        {
+          "check": "max_steps",
+          "expected": 13,
+          "actual": 13,
+          "ok": true
+        },
+        {
+          "check": "min_goals",
+          "expected": 1,
+          "actual": 4,
+          "ok": true
+        },
+        {
+          "check": "state_saved",
+          "expected": true,
+          "actual": "runs/ и logs/ записаны",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171316_cf12",
+      "status": "stopped_by_limit",
+      "errors": [
+        "Остановлено защитой: Превышен лимит шагов (12). Показаны частичные результаты."
+      ],
+      "metrics": {
+        "goals": 4,
+        "tasks": 8,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 13,
+        "elapsed_sec": 33.1,
+        "llm_calls": 8,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.333,
+        "max_agent": "strategy_analyst",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 2,
+          "tool_calls": 2,
+          "total": 4,
+          "share": 0.333
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 4,
+          "tool_calls": 0,
+          "total": 4,
+          "share": 0.333
+        },
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 1,
+          "tool_calls": 2,
+          "total": 3,
+          "share": 0.25
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.083
+        }
+      ],
+      "wall_sec": 33.1,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171316_cf12.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S14",
+      "title": "Лимит времени выполнения",
+      "expected_result": "Прогон останавливается по лимиту времени с понятным сообщением, состояние сохранено.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "stopped_by_limit"
+          ],
+          "actual": "stopped_by_limit",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "лимит времени",
+          "actual": "Остановлено защитой: Превышен лимит времени (8 с). Показаны частичные результаты.",
+          "ok": true
+        },
+        {
+          "check": "state_saved",
+          "expected": true,
+          "actual": "runs/ и logs/ записаны",
+          "ok": true
+        },
+        {
+          "check": "max_elapsed_sec",
+          "expected": 60,
+          "actual": 9.0,
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171349_1fe2",
+      "status": "stopped_by_limit",
+      "errors": [
+        "Остановлено защитой: Превышен лимит времени (8 с). Показаны частичные результаты."
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 5,
+        "elapsed_sec": 9.0,
+        "llm_calls": 2,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.75,
+        "max_agent": "strategy_analyst",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 1,
+          "tool_calls": 2,
+          "total": 3,
+          "share": 0.75
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.25
+        }
+      ],
+      "wall_sec": 9.0,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171349_1fe2.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S15",
+      "title": "Отключённые доработки (MAX_REVISIONS = 0)",
+      "expected_result": "Цикл доработки не запускается: ни у одного KPI нет доработок, непрошедшие проверку KPI сразу получают статус «требует внимания».",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "done"
+          ],
+          "actual": "done",
+          "ok": true
+        },
+        {
+          "check": "max_revisions",
+          "expected": 0,
+          "actual": 0,
+          "ok": true
+        },
+        {
+          "check": "kpi_statuses_subset",
+          "expected": [
+            "approved",
+            "needs_attention"
+          ],
+          "actual": [
+            "approved"
+          ],
+          "ok": true
+        },
+        {
+          "check": "min_kpis",
+          "expected": 1,
+          "actual": 4,
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_171358_21d4",
+      "status": "done",
+      "errors": [],
+      "metrics": {
+        "goals": 2,
+        "tasks": 4,
+        "kpis": 4,
+        "approved_share": 1.0,
+        "first_pass_share": 1.0,
+        "data_linked_share": 0.25,
+        "goal_coverage": 1.0,
+        "avg_smart": 3.75,
+        "revisions_total": 0,
+        "steps": 30,
+        "elapsed_sec": 63.8,
+        "llm_calls": 17,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.3,
+        "max_agent": "kpi_builder",
+        "errors": 0
+      },
+      "load": [
+        {
+          "agent": "kpi_builder",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.3
+        },
+        {
+          "agent": "reviewer",
+          "llm_calls": 4,
+          "tool_calls": 5,
+          "total": 9,
+          "share": 0.3
+        },
+        {
+          "agent": "target_setter",
+          "llm_calls": 4,
+          "tool_calls": 1,
+          "total": 5,
+          "share": 0.167
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 2,
+          "tool_calls": 2,
+          "total": 4,
+          "share": 0.133
+        },
+        {
+          "agent": "decomposer",
+          "llm_calls": 2,
+          "tool_calls": 0,
+          "total": 2,
+          "share": 0.067
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.033
+        }
+      ],
+      "wall_sec": 63.8,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_171358_21d4.jsonl",
+      "typical": false
+    }
+  ]
+}

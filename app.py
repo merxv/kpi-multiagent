@@ -5,14 +5,16 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from kpi_system import Settings, kpis_dataframe, load_dataframe, run_pipeline
+from kpi_system import METRIC_TITLES, Settings, kpis_dataframe, load_dataframe, run_pipeline
 from kpi_system.agents import AGENT_TITLES
 from kpi_system.config import DATA_DIR, RUNS_DIR
 from kpi_system.llm import OllamaClient
+from kpi_system.scenarios import load_scenarios, run_scenario
 
 SAMPLE = DATA_DIR / "sample_strategy.txt"
 UPLOADS = RUNS_DIR / "uploads"
 LOAD_LIMIT = 0.40
+SCENARIO_REPORT = Path(__file__).parent / "reports" / "scenarios" / "latest.json"
 
 st.set_page_config(page_title="KPI из стратегии вуза", page_icon="🎯", layout="wide")
 st.title("🎯 Формирование KPI на основе стратегии университета")
@@ -21,6 +23,7 @@ st.caption("Многоагентная система: оркестратор �
 
 # ---------------- Настройки ----------------
 with st.sidebar:
+    section = st.radio("📂 Раздел", ["🚀 Прогон", "🧪 Тестовые сценарии"])
     st.header("⚙️ Модель")
     defaults = Settings()
     url = st.text_input("Ollama URL", defaults.ollama_url)
@@ -40,6 +43,54 @@ with st.sidebar:
 
 settings = Settings(ollama_url=url, model=model, max_goals=max_goals, tasks_per_goal=tasks_per_goal,
                     max_steps=int(max_steps), max_runtime_sec=int(max_runtime), max_revisions=max_revisions)
+
+
+def show_scenario_results(results: list[dict]) -> None:
+    passed = sum(r["passed"] for r in results)
+    c = st.columns(3)
+    c[0].metric("Сценариев", len(results))
+    c[1].metric("Пройдено", f"{passed} из {len(results)}")
+    c[2].metric("Доля успеха", f"{passed / max(len(results), 1):.0%}")
+    st.dataframe(pd.DataFrame([{
+        "ID": r["id"], "Сценарий": r["title"], "Результат": "✅" if r["passed"] else "❌",
+        "Статус": r["status"], "Целей": r["metrics"].get("goals", 0), "KPI": r["metrics"].get("kpis", 0),
+        "Макс. доля агента": f"{r['metrics'].get('max_agent_share', 0):.0%}",
+        "Шагов": r["metrics"].get("steps", 0), "Время, с": r["wall_sec"],
+    } for r in results]), use_container_width=True, hide_index=True)
+    for r in results:
+        with st.expander(f"{'✅' if r['passed'] else '❌'} {r['id']}. {r['title']}"):
+            st.markdown(f"**Ожидаемый результат:** {r['expected_result']}")
+            st.dataframe(pd.DataFrame([{"Проверка": ch["check"], "Ожидалось": str(ch["expected"]),
+                                        "Фактически": str(ch["actual"]), "": "✅" if ch["ok"] else "❌"}
+                                       for ch in r["checks"]]), use_container_width=True, hide_index=True)
+            for e in r["errors"]:
+                st.caption(f"Сообщение системы: {e}")
+
+
+if section == "🧪 Тестовые сценарии":
+    st.subheader("🧪 Тестовые сценарии")
+    scenarios = load_scenarios()
+    st.caption(f"{len(scenarios)} сценариев в tests/scenarios/scenarios.yaml. "
+               "Полный прогон с отчётом: `python run_scenarios.py`")
+    chosen = st.multiselect("Запустить сценарии", [f"{s['id']} · {s['title']}" for s in scenarios])
+    if st.button("▶️ Запустить выбранные", disabled=not chosen):
+        ids = {c.split(" · ")[0] for c in chosen}
+        results, bar = [], st.progress(0.0)
+        for i, sc in enumerate(s for s in scenarios if s["id"] in ids):
+            with st.spinner(f"{sc['id']} {sc['title']}…"):
+                results.append(run_scenario(sc, settings))
+            bar.progress((i + 1) / len(ids))
+        st.session_state["scenario_results"] = results
+    if "scenario_results" in st.session_state:
+        st.markdown("#### Результаты текущего запуска")
+        show_scenario_results(st.session_state["scenario_results"])
+    elif SCENARIO_REPORT.exists():
+        report = json.loads(SCENARIO_REPORT.read_text(encoding="utf-8"))
+        st.markdown(f"#### Последний полный прогон ({report['started'][:16].replace('T', ' ')}, {report['model']})")
+        show_scenario_results(report["results"])
+    else:
+        st.info("Отчёта ещё нет. Запустите `python run_scenarios.py` или выберите сценарии выше.")
+    st.stop()
 
 # ---------------- Входные данные ----------------
 c1, c2 = st.columns([1, 1])
@@ -112,6 +163,12 @@ m[1].metric("Целей", len(state.goals))
 m[2].metric("Задач", len(state.tasks))
 m[3].metric("KPI", len(state.kpis))
 m[4].metric("Принято", sum(k.status == "approved" for k in state.kpis))
+
+if state.metrics.get("kpis"):
+    q = st.columns(len(METRIC_TITLES))
+    for col, (key, title) in zip(q, METRIC_TITLES.items()):
+        v = state.metrics.get(key)
+        col.metric(title, "—" if v is None else (f"{v}" if key == "avg_smart" else f"{v:.0%}"))
 
 tab_kpi, tab_goals, tab_load, tab_msgs, tab_log = st.tabs(
     ["📊 KPI", "🎯 Цели и задачи", "⚖️ Нагрузка агентов", "✉️ Сообщения", "📜 Лог"])

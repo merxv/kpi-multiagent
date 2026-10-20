@@ -1,0 +1,468 @@
+{
+  "runs": 3,
+  "run_dates": [
+    "2026-10-20T16:43:21",
+    "2026-10-20T17:05:53",
+    "2026-10-20T17:15:03"
+  ],
+  "scenarios": [
+    {
+      "id": "S01",
+      "title": "Типовой сценарий — все направления",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 123.6,
+      "kpis_mean": 8,
+      "steps_mean": 57,
+      "max_share_max": 0.323,
+      "failed_checks": []
+    },
+    {
+      "id": "S02",
+      "title": "Фокус на одном направлении (наука)",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 40.9,
+      "kpis_mean": 2,
+      "steps_mean": 19.3,
+      "max_share_max": 0.263,
+      "failed_checks": []
+    },
+    {
+      "id": "S03",
+      "title": "Другой горизонт планирования (2028)",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 39.5,
+      "kpis_mean": 2,
+      "steps_mean": 19.3,
+      "max_share_max": 0.263,
+      "failed_checks": []
+    },
+    {
+      "id": "S04",
+      "title": "Документ с одной стратегической целью",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 32.3,
+      "kpis_mean": 2,
+      "steps_mean": 17.7,
+      "max_share_max": 0.294,
+      "failed_checks": []
+    },
+    {
+      "id": "S05",
+      "title": "Входной документ в формате DOCX",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 66.1,
+      "kpis_mean": 4,
+      "steps_mean": 31,
+      "max_share_max": 0.3,
+      "failed_checks": []
+    },
+    {
+      "id": "S06",
+      "title": "Входной документ в формате PDF",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 63.3,
+      "kpis_mean": 4,
+      "steps_mean": 30.3,
+      "max_share_max": 0.3,
+      "failed_checks": []
+    },
+    {
+      "id": "S07",
+      "title": "Расплывчатая стратегия без измеримых целей",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 61.1,
+      "kpis_mean": 4,
+      "steps_mean": 31,
+      "max_share_max": 0.343,
+      "failed_checks": []
+    },
+    {
+      "id": "S08",
+      "title": "Документ без стратегических целей",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 5.0,
+      "kpis_mean": 0,
+      "steps_mean": 4,
+      "max_share_max": 0.75,
+      "failed_checks": []
+    },
+    {
+      "id": "S09",
+      "title": "Слишком короткий документ",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 2.8,
+      "kpis_mean": 0,
+      "steps_mean": 2,
+      "max_share_max": 0.5,
+      "failed_checks": []
+    },
+    {
+      "id": "S10",
+      "title": "Неподдерживаемый формат файла",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 2.8,
+      "kpis_mean": 0,
+      "steps_mean": 2,
+      "max_share_max": 0.5,
+      "failed_checks": []
+    },
+    {
+      "id": "S11",
+      "title": "Файл не существует",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 2.7,
+      "kpis_mean": 0,
+      "steps_mean": 2,
+      "max_share_max": 0.5,
+      "failed_checks": []
+    },
+    {
+      "id": "S12",
+      "title": "Модель недоступна (Ollama выключена)",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 2.0,
+      "kpis_mean": 0,
+      "steps_mean": 1,
+      "max_share_max": 1.0,
+      "failed_checks": []
+    },
+    {
+      "id": "S13",
+      "title": "Защита от зацикливания — лимит шагов",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 32.5,
+      "kpis_mean": 0,
+      "steps_mean": 13,
+      "max_share_max": 0.333,
+      "failed_checks": []
+    },
+    {
+      "id": "S14",
+      "title": "Лимит времени выполнения",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 9.4,
+      "kpis_mean": 0,
+      "steps_mean": 5,
+      "max_share_max": 0.75,
+      "failed_checks": []
+    },
+    {
+      "id": "S15",
+      "title": "Отключённые доработки (MAX_REVISIONS = 0)",
+      "passed": 3,
+      "runs": 3,
+      "time_mean": 65.2,
+      "kpis_mean": 4,
+      "steps_mean": 30.7,
+      "max_share_max": 0.3,
+      "failed_checks": []
+    }
+  ],
+  "pass_rate": 1.0,
+  "per_run_pass": [
+    15,
+    15,
+    15
+  ],
+  "load_s01": [
+    {
+      "agent": "reviewer",
+      "title": "Проверяющий",
+      "llm": 8.333333333333334,
+      "tool": 9.666666666666666,
+      "share_mean": 0.31566666666666665,
+      "share_max": 0.323
+    },
+    {
+      "agent": "kpi_builder",
+      "title": "Конструктор KPI",
+      "llm": 8.333333333333334,
+      "tool": 9.333333333333334,
+      "share_mean": 0.31,
+      "share_max": 0.315
+    },
+    {
+      "agent": "target_setter",
+      "title": "Агент целевых значений",
+      "llm": 8.333333333333334,
+      "tool": 4,
+      "share_mean": 0.216,
+      "share_max": 0.226
+    },
+    {
+      "agent": "strategy_analyst",
+      "title": "Аналитик стратегии",
+      "llm": 2,
+      "tool": 2,
+      "share_mean": 0.07066666666666667,
+      "share_max": 0.074
+    },
+    {
+      "agent": "decomposer",
+      "title": "Декомпозитор целей",
+      "llm": 4,
+      "tool": 0,
+      "share_mean": 0.07066666666666667,
+      "share_max": 0.074
+    },
+    {
+      "agent": "orchestrator",
+      "title": "Оркестратор",
+      "llm": 1,
+      "tool": 0,
+      "share_mean": 0.017666666666666667,
+      "share_max": 0.019
+    }
+  ],
+  "kpi_statuses": {
+    "approved": 87,
+    "needs_attention": 3
+  },
+  "smart_means": {
+    "specific": 3.46,
+    "measurable": 4.58,
+    "achievable": 3.5,
+    "relevant": 3.72,
+    "time_bound": 3.89
+  },
+  "smart_le2_share": 0.002,
+  "quality_mean": {
+    "approved_share": 0.969,
+    "first_pass_share": 0.964,
+    "data_linked_share": 0.453,
+    "goal_coverage": 1.0,
+    "avg_smart": 3.838,
+    "revisions_total": 0.083,
+    "llm_retries": 0.0
+  },
+  "quality_by_scenario": [
+    {
+      "id": "S01",
+      "approved_share": 1.0,
+      "first_pass_share": 0.958,
+      "data_linked_share": 0.458,
+      "goal_coverage": 1.0,
+      "avg_smart": 3.84,
+      "revisions_total": 0.333,
+      "llm_retries": 0.0
+    },
+    {
+      "id": "S02",
+      "approved_share": 1.0,
+      "first_pass_share": 1.0,
+      "data_linked_share": 0.667,
+      "goal_coverage": 1.0,
+      "avg_smart": 4.067,
+      "revisions_total": 0.0,
+      "llm_retries": 0.0
+    },
+    {
+      "id": "S03",
+      "approved_share": 1.0,
+      "first_pass_share": 1.0,
+      "data_linked_share": 0.667,
+      "goal_coverage": 1.0,
+      "avg_smart": 3.8,
+      "revisions_total": 0.0,
+      "llm_retries": 0.0
+    },
+    {
+      "id": "S04",
+      "approved_share": 1.0,
+      "first_pass_share": 1.0,
+      "data_linked_share": 0.333,
+      "goal_coverage": 1.0,
+      "avg_smart": 3.8,
+      "revisions_total": 0.0,
+      "llm_retries": 0.0
+    },
+    {
+      "id": "S05",
+      "approved_share": 1.0,
+      "first_pass_share": 1.0,
+      "data_linked_share": 0.5,
+      "goal_coverage": 1.0,
+      "avg_smart": 3.867,
+      "revisions_total": 0.0,
+      "llm_retries": 0.0
+    },
+    {
+      "id": "S06",
+      "approved_share": 1.0,
+      "first_pass_share": 1.0,
+      "data_linked_share": 0.333,
+      "goal_coverage": 1.0,
+      "avg_smart": 3.917,
+      "revisions_total": 0.0,
+      "llm_retries": 0.0
+    },
+    {
+      "id": "S07",
+      "approved_share": 0.917,
+      "first_pass_share": 0.917,
+      "data_linked_share": 0.25,
+      "goal_coverage": 1.0,
+      "avg_smart": 3.617,
+      "revisions_total": 0.333,
+      "llm_retries": 0.0
+    },
+    {
+      "id": "S15",
+      "approved_share": 0.833,
+      "first_pass_share": 0.833,
+      "data_linked_share": 0.417,
+      "goal_coverage": 1.0,
+      "avg_smart": 3.8,
+      "revisions_total": 0.0,
+      "llm_retries": 0.0
+    }
+  ],
+  "compare": {
+    "multi": {
+      "runs": 9,
+      "success_share": 1.0,
+      "kpis_mean": 4.7,
+      "within_limit_share": 1.0,
+      "formal_pass_share": 0.972,
+      "no_duplicates_share": 1.0,
+      "data_linked_share": 0.347,
+      "baseline_correct_share": 1.0,
+      "target_dev_mean": 0.0,
+      "target_dev_over_25": 0,
+      "targets_checked": 16,
+      "target_within_25_share": 1.0,
+      "elapsed_mean": 72.3,
+      "llm_calls_mean": 19.3
+    },
+    "single": {
+      "runs": 9,
+      "success_share": 1.0,
+      "kpis_mean": 6.8,
+      "within_limit_share": 0.667,
+      "formal_pass_share": 0.773,
+      "no_duplicates_share": 0.889,
+      "data_linked_share": 0.866,
+      "baseline_correct_share": 1.0,
+      "target_dev_mean": 0.267,
+      "target_dev_over_25": 20,
+      "targets_checked": 45,
+      "target_within_25_share": 0.556,
+      "elapsed_mean": 20.8,
+      "llm_calls_mean": 1
+    },
+    "multi_by_case": {
+      "S01": {
+        "runs": 3,
+        "success_share": 1.0,
+        "kpis_mean": 8,
+        "within_limit_share": 1.0,
+        "formal_pass_share": 1.0,
+        "no_duplicates_share": 1.0,
+        "data_linked_share": 0.458,
+        "baseline_correct_share": 1.0,
+        "target_dev_mean": 0.0,
+        "target_dev_over_25": 0,
+        "targets_checked": 11,
+        "target_within_25_share": 1.0,
+        "elapsed_mean": 123.6,
+        "llm_calls_mean": 32
+      },
+      "S04": {
+        "runs": 3,
+        "success_share": 1.0,
+        "kpis_mean": 2,
+        "within_limit_share": 1.0,
+        "formal_pass_share": 1.0,
+        "no_duplicates_share": 1.0,
+        "data_linked_share": 0.333,
+        "baseline_correct_share": 1.0,
+        "target_dev_mean": 0.0,
+        "target_dev_over_25": 0,
+        "targets_checked": 2,
+        "target_within_25_share": 1.0,
+        "elapsed_mean": 32.3,
+        "llm_calls_mean": 9
+      },
+      "S07": {
+        "runs": 3,
+        "success_share": 1.0,
+        "kpis_mean": 4,
+        "within_limit_share": 1.0,
+        "formal_pass_share": 0.917,
+        "no_duplicates_share": 1.0,
+        "data_linked_share": 0.25,
+        "baseline_correct_share": 1.0,
+        "target_dev_mean": 0.0,
+        "target_dev_over_25": 0,
+        "targets_checked": 3,
+        "target_within_25_share": 1.0,
+        "elapsed_mean": 61.1,
+        "llm_calls_mean": 17
+      }
+    },
+    "single_by_case": {
+      "S01": {
+        "runs": 3,
+        "success_share": 1.0,
+        "kpis_mean": 13.3,
+        "within_limit_share": 0.0,
+        "formal_pass_share": 0.925,
+        "no_duplicates_share": 0.667,
+        "data_linked_share": 0.599,
+        "baseline_correct_share": 1.0,
+        "target_dev_mean": 0.212,
+        "target_dev_over_25": 8,
+        "targets_checked": 24,
+        "target_within_25_share": 0.667,
+        "elapsed_mean": 39.6,
+        "llm_calls_mean": 1
+      },
+      "S04": {
+        "runs": 3,
+        "success_share": 1.0,
+        "kpis_mean": 2,
+        "within_limit_share": 1.0,
+        "formal_pass_share": 0.667,
+        "no_duplicates_share": 1.0,
+        "data_linked_share": 1.0,
+        "baseline_correct_share": 1.0,
+        "target_dev_mean": 0.217,
+        "target_dev_over_25": 3,
+        "targets_checked": 6,
+        "target_within_25_share": 0.5,
+        "elapsed_mean": 7.7,
+        "llm_calls_mean": 1
+      },
+      "S07": {
+        "runs": 3,
+        "success_share": 1.0,
+        "kpis_mean": 5,
+        "within_limit_share": 1.0,
+        "formal_pass_share": 0.728,
+        "no_duplicates_share": 1.0,
+        "data_linked_share": 1.0,
+        "baseline_correct_share": 1.0,
+        "target_dev_mean": 0.371,
+        "target_dev_over_25": 9,
+        "targets_checked": 15,
+        "target_within_25_share": 0.4,
+        "elapsed_mean": 15.3,
+        "llm_calls_mean": 1
+      }
+    }
+  }
+}

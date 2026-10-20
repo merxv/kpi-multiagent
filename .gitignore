@@ -10,3 +10,4 @@ data/kpi_library.db
 .claude/
 ~$*.docx
 docs
+.vscode/settings.json

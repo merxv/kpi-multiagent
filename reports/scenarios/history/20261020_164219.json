@@ -1,0 +1,342 @@
+{
+  "started": "2026-10-20T16:42:19",
+  "model": "qwen2.5:7b",
+  "results": [
+    {
+      "id": "S08",
+      "title": "Документ без стратегических целей",
+      "expected_result": "Понятное сообщение «В документе не найдено стратегических целей», KPI не создаются.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "не найдено стратегических целей",
+          "actual": "В документе не найдено стратегических целей",
+          "ok": true
+        },
+        {
+          "check": "max_kpis",
+          "expected": 0,
+          "actual": 0,
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_164219_0521",
+      "status": "failed",
+      "errors": [
+        "В документе не найдено стратегических целей"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 4,
+        "elapsed_sec": 46.1,
+        "llm_calls": 2,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.75,
+        "max_agent": "strategy_analyst",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 1,
+          "tool_calls": 2,
+          "total": 3,
+          "share": 0.75
+        },
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.25
+        }
+      ],
+      "wall_sec": 46.1,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_164219_0521.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S09",
+      "title": "Слишком короткий документ",
+      "expected_result": "Понятное сообщение «Документ пуст или слишком короткий».",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "слишком короткий",
+          "actual": "Инструмент read_document: Документ пуст или слишком короткий (меньше 100 символов)",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_164305_268b",
+      "status": "failed",
+      "errors": [
+        "Инструмент read_document: Документ пуст или слишком короткий (меньше 100 символов)"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 2,
+        "elapsed_sec": 2.9,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.5,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.5
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 0,
+          "tool_calls": 1,
+          "total": 1,
+          "share": 0.5
+        }
+      ],
+      "wall_sec": 2.9,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_164305_268b.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S10",
+      "title": "Неподдерживаемый формат файла",
+      "expected_result": "Понятное сообщение «Неподдерживаемый формат» со списком допустимых форматов.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "Неподдерживаемый формат",
+          "actual": "Инструмент read_document: Неподдерживаемый формат: .csv. Допустимо: txt, md, pdf, docx",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_164308_374f",
+      "status": "failed",
+      "errors": [
+        "Инструмент read_document: Неподдерживаемый формат: .csv. Допустимо: txt, md, pdf, docx"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 2,
+        "elapsed_sec": 2.7,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.5,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.5
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 0,
+          "tool_calls": 1,
+          "total": 1,
+          "share": 0.5
+        }
+      ],
+      "wall_sec": 2.7,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_164308_374f.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S11",
+      "title": "Файл не существует",
+      "expected_result": "Понятное сообщение «Файл не найден».",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "Файл не найден",
+          "actual": "Инструмент read_document: Файл не найден: missing_strategy.txt",
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_164311_2cac",
+      "status": "failed",
+      "errors": [
+        "Инструмент read_document: Файл не найден: missing_strategy.txt"
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 2,
+        "elapsed_sec": 2.7,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 0,
+        "max_agent_share": 0.5,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 0.5
+        },
+        {
+          "agent": "strategy_analyst",
+          "llm_calls": 0,
+          "tool_calls": 1,
+          "total": 1,
+          "share": 0.5
+        }
+      ],
+      "wall_sec": 2.7,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_164311_2cac.jsonl",
+      "typical": false
+    },
+    {
+      "id": "S12",
+      "title": "Модель недоступна (Ollama выключена)",
+      "expected_result": "Понятное сообщение «Нет связи с Ollama», система не зависает, состояние и лог сохранены.",
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "expected": [
+            "failed"
+          ],
+          "actual": "failed",
+          "ok": true
+        },
+        {
+          "check": "error_contains",
+          "expected": "Нет связи с Ollama",
+          "actual": "orchestrator: Нет связи с Ollama (http://127.0.0.1:9). Запустите Ollama и повторите.",
+          "ok": true
+        },
+        {
+          "check": "state_saved",
+          "expected": true,
+          "actual": "runs/ и logs/ записаны",
+          "ok": true
+        },
+        {
+          "check": "max_elapsed_sec",
+          "expected": 30,
+          "actual": 2.0,
+          "ok": true
+        }
+      ],
+      "run_id": "20261020_164314_c0be",
+      "status": "failed",
+      "errors": [
+        "orchestrator: Нет связи с Ollama (http://127.0.0.1:9). Запустите Ollama и повторите."
+      ],
+      "metrics": {
+        "goals": 0,
+        "tasks": 0,
+        "kpis": 0,
+        "approved_share": 0.0,
+        "first_pass_share": 0.0,
+        "data_linked_share": 0.0,
+        "goal_coverage": 0.0,
+        "avg_smart": null,
+        "revisions_total": 0,
+        "steps": 1,
+        "elapsed_sec": 2.0,
+        "llm_calls": 1,
+        "llm_retries": 0,
+        "llm_errors": 1,
+        "max_agent_share": 1.0,
+        "max_agent": "orchestrator",
+        "errors": 1
+      },
+      "load": [
+        {
+          "agent": "orchestrator",
+          "llm_calls": 1,
+          "tool_calls": 0,
+          "total": 1,
+          "share": 1.0
+        }
+      ],
+      "wall_sec": 2.0,
+      "log_path": "C:\\Users\\legionnaire\\Desktop\\multiagent (aiml solo)\\logs\\20261020_164314_c0be.jsonl",
+      "typical": false
+    }
+  ]
+}

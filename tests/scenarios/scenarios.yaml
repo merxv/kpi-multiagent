@@ -1,0 +1,199 @@
+# Тестовые сценарии системы формирования KPI.
+# Запуск: python run_scenarios.py            (все)
+#         python run_scenarios.py --only S01,S08
+#
+# doc       — путь к документу относительно корня проекта
+# request   — запрос пользователя
+# settings  — переопределение настроек (Settings) для сценария
+# expected_result — ожидаемый результат словами (идёт в отчёт)
+# expect    — автоматические проверки (см. kpi_system/scenarios.py, CHECKS)
+
+- id: S01
+  title: Типовой сценарий — все направления
+  doc: data/sample_strategy.txt
+  request: Сформируй KPI до 2030 года по всем направлениям
+  settings: {max_goals: 4}
+  typical: true
+  expected_result: >
+    Найдено 3–4 цели, сформировано не менее 6 KPI с формулой и единицей; не менее 60% KPI приняты;
+    у каждой цели есть принятый KPI; целевые значения согласованы с направлением показателя;
+    ни один агент не выполняет более 40% вызовов.
+  expect:
+    status: [done]
+    min_goals: 3
+    min_kpis: 6
+    kpi_fields_complete: true
+    targets_consistent: true
+    min_approved_share: 0.6
+    min_goal_coverage: 0.75
+    max_agent_share: 0.4
+
+- id: S02
+  title: Фокус на одном направлении (наука)
+  doc: data/sample_strategy.txt
+  request: Сформируй KPI до 2030 года только по научной деятельности
+  settings: {max_goals: 3}
+  expected_result: >
+    Оркестратор извлекает фокус «наука»; все выбранные цели относятся к науке; сформирован хотя бы 1 KPI.
+  expect:
+    status: [done]
+    focus_directions: [наука]
+    goal_directions_subset: [наука]
+    min_kpis: 1
+    max_agent_share: 0.4
+
+- id: S03
+  title: Другой горизонт планирования (2028)
+  doc: data/sample_strategy.txt
+  request: Нужны KPI до 2028 года, акцент на цифровизации
+  settings: {max_goals: 2}
+  expected_result: >
+    Горизонт плана — 2028 год, у всех KPI год цели 2028; цели относятся к цифровизации.
+  expect:
+    status: [done]
+    horizon_year: 2028
+    goal_directions_subset: [цифровизация]
+    min_kpis: 1
+    targets_consistent: true
+
+- id: S04
+  title: Документ с одной стратегической целью
+  doc: data/test_docs/single_goal.txt
+  request: Сформируй KPI
+  settings: {max_goals: 4}
+  expected_result: >
+    Система не выдумывает лишних целей (не более 2), формирует KPI по цифровой среде.
+  expect:
+    status: [done]
+    min_goals: 1
+    max_goals: 2
+    min_kpis: 1
+    kpi_fields_complete: true
+
+- id: S05
+  title: Входной документ в формате DOCX
+  doc: data/test_docs/sample_strategy.docx
+  request: KPI до 2030 года
+  settings: {max_goals: 2}
+  expected_result: Документ DOCX читается, система проходит полный цикл и формирует KPI.
+  expect:
+    status: [done]
+    min_goals: 2
+    min_kpis: 3
+    kpi_fields_complete: true
+
+- id: S06
+  title: Входной документ в формате PDF
+  doc: data/test_docs/sample_strategy.pdf
+  request: KPI до 2030 года
+  settings: {max_goals: 2}
+  expected_result: Документ PDF читается, система проходит полный цикл и формирует KPI.
+  expect:
+    status: [done]
+    min_goals: 2
+    min_kpis: 3
+    kpi_fields_complete: true
+
+- id: S07
+  title: Расплывчатая стратегия без измеримых целей
+  doc: data/test_docs/vague_strategy.txt
+  request: Сформируй KPI
+  settings: {max_goals: 3}
+  expected_result: >
+    Система не падает с непредвиденной ошибкой: либо сообщает, что целей нет, либо формирует KPI,
+    у каждого из которых есть формула и единица измерения.
+  expect:
+    status: [done, failed]
+    no_unexpected_error: true
+    kpi_fields_complete: true
+
+- id: S08
+  title: Документ без стратегических целей
+  doc: data/test_docs/no_goals.txt
+  request: Сформируй KPI
+  expected_result: Понятное сообщение «В документе не найдено стратегических целей», KPI не создаются.
+  expect:
+    status: [failed]
+    error_contains: не найдено стратегических целей
+    max_kpis: 0
+
+- id: S09
+  title: Слишком короткий документ
+  doc: data/test_docs/too_short.txt
+  request: Сформируй KPI
+  expected_result: Понятное сообщение «Документ пуст или слишком короткий».
+  expect:
+    status: [failed]
+    error_contains: слишком короткий
+
+- id: S10
+  title: Неподдерживаемый формат файла
+  doc: data/test_docs/strategy_table.csv
+  request: Сформируй KPI
+  expected_result: Понятное сообщение «Неподдерживаемый формат» со списком допустимых форматов.
+  expect:
+    status: [failed]
+    error_contains: Неподдерживаемый формат
+
+- id: S11
+  title: Файл не существует
+  doc: data/test_docs/missing_strategy.txt
+  request: Сформируй KPI
+  expected_result: Понятное сообщение «Файл не найден».
+  expect:
+    status: [failed]
+    error_contains: Файл не найден
+
+- id: S12
+  title: Модель недоступна (Ollama выключена)
+  doc: data/sample_strategy.txt
+  request: Сформируй KPI
+  settings: {ollama_url: "http://127.0.0.1:9", llm_retries: 1}
+  expected_result: >
+    Понятное сообщение «Нет связи с Ollama», система не зависает, состояние и лог сохранены.
+  expect:
+    status: [failed]
+    error_contains: Нет связи с Ollama
+    state_saved: true
+    max_elapsed_sec: 30
+
+- id: S13
+  title: Защита от зацикливания — лимит шагов
+  doc: data/sample_strategy.txt
+  request: Сформируй KPI до 2030 года
+  settings: {max_steps: 12, max_goals: 4}
+  expected_result: >
+    Прогон останавливается на 13-м шаге со статусом stopped_by_limit и сообщением о лимите шагов;
+    частичные результаты (цели, задачи) сохранены.
+  expect:
+    status: [stopped_by_limit]
+    error_contains: лимит шагов
+    max_steps: 13
+    min_goals: 1
+    state_saved: true
+
+- id: S14
+  title: Лимит времени выполнения
+  doc: data/sample_strategy.txt
+  request: Сформируй KPI до 2030 года
+  settings: {max_runtime_sec: 8, max_goals: 4}
+  expected_result: Прогон останавливается по лимиту времени с понятным сообщением, состояние сохранено.
+  expect:
+    status: [stopped_by_limit]
+    error_contains: лимит времени
+    state_saved: true
+    max_elapsed_sec: 60
+
+- id: S15
+  title: Отключённые доработки (MAX_REVISIONS = 0)
+  doc: data/sample_strategy.txt
+  request: KPI до 2030 года по образованию и финансам
+  settings: {max_goals: 2, max_revisions: 0}
+  expected_result: >
+    Цикл доработки не запускается: ни у одного KPI нет доработок, непрошедшие проверку KPI сразу
+    получают статус «требует внимания».
+  expect:
+    status: [done]
+    max_revisions: 0
+    kpi_statuses_subset: [approved, needs_attention]
+    min_kpis: 1

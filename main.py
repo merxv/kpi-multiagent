@@ -3,7 +3,7 @@
 """
 import argparse
 
-from kpi_system import Settings, kpis_dataframe, load_dataframe, run_pipeline
+from kpi_system import METRIC_TITLES, Settings, kpis_dataframe, load_dataframe, run_pipeline
 from kpi_system.agents import AGENT_TITLES
 
 

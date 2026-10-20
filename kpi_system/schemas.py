@@ -78,6 +78,7 @@ class KPI(BaseModel):
     justification: str = ""
     status: Literal["draft", "approved", "needs_revision", "needs_attention"] = "draft"
     review_notes: list[str] = []
+    smart: dict[str, int] = {}
     revisions: int = 0
 
 
@@ -134,7 +135,30 @@ class JustificationOut(BaseModel):
     justification: str
 
 
+SMART_KEYS = ("specific", "measurable", "achievable", "relevant", "time_bound")
+
+
 class ReviewOut(BaseModel):
-    relevant: bool
-    measurable: bool
+    specific: int = 3
+    measurable: int          # ключевые критерии обязательны: без них ответ отправляется на повтор
+    achievable: int = 3
+    relevant: int
+    time_bound: int = 3
     comment: str = ""
+
+    @field_validator(*SMART_KEYS, mode="before")
+    @classmethod
+    def _clamp(cls, v):
+        """Модель иногда отвечает 6, 0, 4.5 или true — приводим к шкале 1–5."""
+        if isinstance(v, bool):
+            return 5 if v else 1
+        try:
+            return max(1, min(5, round(float(v))))
+        except (TypeError, ValueError):
+            return 3
+
+    def scores(self) -> dict[str, int]:
+        return {k: getattr(self, k) for k in SMART_KEYS}
+
+    def mean(self) -> float:
+        return sum(self.scores().values()) / len(SMART_KEYS)

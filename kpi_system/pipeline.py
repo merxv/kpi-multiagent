@@ -11,6 +11,7 @@ from .agents import (AGENT_TITLES, AgentError, Decomposer, KPIBuilder, Orchestra
 from .config import Settings
 from .llm import OllamaClient
 from .logger import RunLogger
+from .quality import quality_metrics
 from .state import LimitExceeded, TaskState
 
 STATUS_TITLES = {
@@ -47,9 +48,10 @@ def run_pipeline(document_path: str, request: str = "", settings: Optional[Setti
         state.errors.append(f"Непредвиденная ошибка: {type(e).__name__}: {e}")
     finally:
         state.finished_at = time.time()
+        state.metrics = quality_metrics(state, logger)
         state.save()
         logger.log("run_end", "system", status=state.status, steps=state.steps,
-                   elapsed_sec=state.elapsed, errors=state.errors)
+                   elapsed_sec=state.elapsed, errors=state.errors, metrics=state.metrics)
     return state, logger
 
 
@@ -65,6 +67,7 @@ def kpis_dataframe(state: TaskState) -> pd.DataFrame:
             "Периодичность": k.periodicity, "База": k.baseline, "Год базы": k.baseline_year,
             "Цель (значение)": k.target, "Год цели": k.target_year, "Источник данных": k.data_source,
             "Обоснование": k.justification, "Статус": STATUS_TITLES.get(k.status, k.status),
+            "SMART (S/M/A/R/T)": "/".join(str(v) for v in k.smart.values()) if k.smart else "",
             "Замечания": "; ".join(k.review_notes), "Доработок": k.revisions,
         })
     return pd.DataFrame(rows)

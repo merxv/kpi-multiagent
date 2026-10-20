@@ -23,6 +23,7 @@ class TaskState(BaseModel):
     kpis: list[KPI] = []
     messages: list[AgentMessage] = []
     errors: list[str] = []
+    metrics: dict[str, Any] = {}
     steps: int = 0
     max_steps: int
     max_runtime_sec: int

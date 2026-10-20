@@ -91,3 +91,54 @@ def test_tool_limit_per_agent():
             return {str(i): print for i in range(MAX_TOOLS + 1)}
     with pytest.raises(ValueError):
         Greedy(ctx=None)
+
+
+# ---------- правила проверяющего (SMART) ----------
+GOOD_KPI = {"name": "Доля трудоустроенных выпускников", "formula": "Трудоустроенные / выпускники × 100",
+            "unit": "%", "periodicity": "год", "data_source": "Мониторинг", "baseline": 81, "target": 90,
+            "higher_is_better": True}
+
+
+def test_good_kpi_has_no_errors():
+    assert check_kpi_formal(GOOD_KPI, "Повысить трудоустройство выпускников")["errors"] == []
+
+
+def test_action_verb_name_rejected():
+    errors = check_kpi_formal({**GOOD_KPI, "name": "Повысить долю трудоустроенных"})["errors"]
+    assert any("действие" in e for e in errors)
+
+
+def test_formula_without_calculation_rejected():
+    errors = check_kpi_formal({**GOOD_KPI, "formula": "по данным отдела кадров"})["errors"]
+    assert any("способ расчёта" in e for e in errors)
+
+
+def test_name_copying_task_rejected():
+    errors = check_kpi_formal(GOOD_KPI, task_title="Доля трудоустроенных выпускников")["errors"]
+    assert any("повторяет задачу" in e for e in errors)
+
+
+def test_target_equal_to_baseline_rejected():
+    errors = check_kpi_formal({**GOOD_KPI, "target": 81})["errors"]
+    assert any("не отличается" in e for e in errors)
+
+
+def test_smart_scores_clamped_and_required():
+    from pydantic import ValidationError
+    from kpi_system.schemas import ReviewOut
+    r = ReviewOut(specific=7, measurable="4", achievable=0, relevant=True, time_bound=4.6)
+    assert r.scores() == {"specific": 5, "measurable": 4, "achievable": 1, "relevant": 5, "time_bound": 5}
+    with pytest.raises(ValidationError):
+        ReviewOut(specific=4)  # нет measurable и relevant — ответ модели отправится на повтор
+
+
+# ---------- сценарии ----------
+def test_scenarios_file_valid():
+    from kpi_system.scenarios import CHECKS, load_scenarios
+    scenarios = load_scenarios()
+    assert len(scenarios) >= 10
+    assert len({s["id"] for s in scenarios}) == len(scenarios)
+    for s in scenarios:
+        assert s.get("expected_result") and s.get("expect")
+        assert set(s["expect"]) <= set(CHECKS), s["id"]
+        assert s["doc"]
